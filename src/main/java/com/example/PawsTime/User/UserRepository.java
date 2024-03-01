@@ -1,0 +1,9 @@
+package com.example.PawsTime.User;
+
+import com.example.PawsTime.core.CustomQuerydslPredicateExecutor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long>, CustomQuerydslPredicateExecutor<User> {
+}
