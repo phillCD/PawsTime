@@ -1,4 +1,4 @@
-package com.example.PawsTime.User;
+package com.example.PawsTime.user;
 
 import com.example.PawsTime.core.CustomQuerydslPredicateExecutor;
 import org.springframework.data.jpa.repository.JpaRepository;
