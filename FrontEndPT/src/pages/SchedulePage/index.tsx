@@ -1,7 +1,10 @@
+import Navbar from '../../components/Navbar';
+import "../../index.css"
+
 export default function SchedulePage() {
     return(
         <div>
-            <h1>Hello World!</h1>
+            <Navbar />
         </div>
     )
 }

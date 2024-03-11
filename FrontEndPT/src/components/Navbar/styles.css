@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Roboto:wght@400;700&display=swap');
+
+.active {
+    background-color: #8fddc2;
+    border-radius: 6px;
+}
+
+.linkToLogin{ 
+    text-decoration: none;  
+}
+
+.linkToLogin:hover {
+    opacity: 0.8;
+}
+
+.navBarText {
+    color: white;
+    font-weight: bold;
+}
+
+.siteTitle {
+    font-family: "Inter", sans-serif;
+    font-weight: normal;
+    padding-left: 5px;
+    color: white;
+}
+
+header .navContainer {
+    margin: 10px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #31AD45;
+    padding: 8px;
+}
+
+nav .logo {
+    margin: 10px;
+    padding: 2px;
+    width: 25%;
+    aspect-ratio: 1.5;
+    background-color: white;
+    border-radius: 5px;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
+nav ul li a:not(.active):hover {
+    background-color: #8fddc2;
+}
+
+.button:not(.active):hover {
+    background-color: #8fddc2;
+}
+
+nav .menu {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 2rem;
+}
+
+nav .menu span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: white;
+    border-radius: 0.2rem;
+    color: transparent;
+}
+
+@media (max-width: 600px) {
+    nav .menu {
+        display: flex;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        margin: 0.2rem 0.5rem;
+    }
+}
