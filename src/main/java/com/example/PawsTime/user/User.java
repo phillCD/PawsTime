@@ -19,7 +19,7 @@ public class User extends EntityId {
     private String name;
     @NonNull
     @Column(name = "birth_date")
-    private String birthDate;
+    private String birthdate;
     @NonNull
     @Column(name = "gender")
     private Gender gender;
@@ -45,4 +45,5 @@ public class User extends EntityId {
     @NonNull
     @Column(name = "type")
     private Integer type;
+
 }
