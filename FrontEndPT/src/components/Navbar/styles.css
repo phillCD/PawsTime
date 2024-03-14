@@ -18,14 +18,8 @@
     font-weight: bold;
 }
 
-.siteTitle {
-    font-family: "Inter", sans-serif;
-    font-weight: normal;
-    padding-left: 5px;
-    color: white;
-}
-
 header .navContainer {
+    display: absolute;
     margin: 10px;
 }
 
@@ -35,15 +29,6 @@ nav {
     justify-content: center;
     background-color: #31AD45;
     padding: 8px;
-}
-
-nav .logo {
-    margin: 10px;
-    padding: 2px;
-    width: 25%;
-    aspect-ratio: 1.5;
-    background-color: white;
-    border-radius: 5px;
 }
 
 nav ul {
