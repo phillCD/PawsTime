@@ -18,8 +18,8 @@ public interface UserRepresentation {
         private String login;
 
         @NotNull
-        @NotBlank
-        private Clinic clinic_id;
+        @NotEmpty
+        private Clinic clinicId;
 
         @NotNull(message = "Name is required")
         @NotEmpty(message = "Name is required")
@@ -61,6 +61,38 @@ public interface UserRepresentation {
 
     }
 
+    class UserUpdate {
+        @NotNull
+        @Size(min = 3, max = 50)
+        private String login;
+
+        @NotNull
+        @NotEmpty
+        private Clinic clinicId;
+
+        @NotNull(message = "Name is required")
+        @NotEmpty(message = "Name is required")
+        private String name;
+
+        @NotNull
+        @Size(min = 6, max = 40)
+        private String password;
+
+        private Set<String> type;
+
+        @NotNull(message = "Document is required")
+        @NotEmpty(message = "Document is required")
+        private String document;
+
+        @NotNull(message = "Birthdate is required")
+        @NotEmpty(message = "Birthdate is required")
+        private String birthdate;
+
+        @NotNull
+        @NotBlank
+        private String address;
+    }
+
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
@@ -74,11 +106,12 @@ public interface UserRepresentation {
         private String birthdate;
         private String address;
 
+
         public static UserResponse from(User user) {
             return UserResponse.builder()
                     .id(user.getId())
                     .login(user.getLogin())
-                    //.clinic_id(user.getClinic_id())
+                    .clinic_id(user.getClinicId())
                     .name(user.getName())
                     .document(user.getDocument())
                     .birthdate(user.getBirthdate())
