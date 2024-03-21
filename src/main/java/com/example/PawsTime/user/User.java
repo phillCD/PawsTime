@@ -1,19 +1,22 @@
 package com.example.PawsTime.user;
 
+import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.core.EntityId;
 import com.example.PawsTime.enums.Gender;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User extends EntityId {
     @ManyToMany
     @JoinColumn(name = "clinic_id", nullable = false)
-    private Long clinicId;
+    private Clinic clinicId;
     @NonNull
     @Column(name = "name")
     private String name;
@@ -46,4 +49,7 @@ public class User extends EntityId {
     @Column(name = "type")
     private Integer type;
 
+    public User(String login, Clinic clinicId, String name, String password, Set<String> type, String document, String birthdate, String address, Gender gender, String cellphone, String speciality, Boolean active) {
+        super();
+    }
 }
