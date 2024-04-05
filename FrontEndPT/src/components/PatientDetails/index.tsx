@@ -30,7 +30,7 @@ export const PatientDetail = ({
             <p>{breed}</p>
             <p>{gender}</p>
           </div>
-          <p className="mt-6">Dono: {ownerName}</p>
+          <p className="mt-6">{ownerName}</p>
         </div>
       </div>
     </div>
