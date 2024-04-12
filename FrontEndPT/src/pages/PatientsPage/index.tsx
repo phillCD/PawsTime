@@ -2,6 +2,9 @@ import "../../index.css";
 import "react-calendar/dist/Calendar.css";
 import ListCard from "../../components/ListCard";
 import { PatientDetail } from "../../components/PatientDetails";
+import SimpleButton from "../../components/SimpleButton";
+import AddIcon from '../../assets/add.svg';
+
 
 export default function PatientsPage() {
   return (
@@ -15,9 +18,12 @@ export default function PatientsPage() {
         ownerName="Dono: Nome do dono"
       />
       <div className="w-full gap-9">
-        <div className="bg-white w-full text-center rounded-md">
+        <div className="bg-white w-full text-center rounded-md flex flex-1 flex-row items-center justify-center">
           <div className="bg-white w-full text-center rounded-md p-4">
             <p>Pacientes</p>
+          </div>
+          <div className="mr-3">
+            <SimpleButton icon={AddIcon}/>
           </div>
         </div>
         <div className="flex flex-1 flex-col bg-white mt-5 rounded-2xl p-6">

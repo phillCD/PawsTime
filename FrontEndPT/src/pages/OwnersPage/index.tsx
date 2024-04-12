@@ -17,11 +17,11 @@ export default function OwnersPage() {
         ownerName="000.000.000-00"
       />
       <div className="w-full gap-9">
-        <div className="bg-white w-full flex flex-1 flex-row text-center rounded-md">
+        <div className="bg-white w-full flex flex-1 flex-row text-center rounded-md items-center justify-center">
           <div className="bg-white w-full text-center rounded-md p-4">
             <p>Donos</p>
           </div>
-          <div className="bg-red-400 items-center justify-center">
+          <div className="mr-3">
             <SimpleButton icon={AddIcon}/>
           </div>
         </div>

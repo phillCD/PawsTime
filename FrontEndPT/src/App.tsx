@@ -3,11 +3,12 @@ import SchedulePage from "./pages/SchedulePage";
 import NavBar from "./components/Navbar";
 import PatientsPage from "./pages/PatientsPage";
 import OwnersPage from "./pages/OwnersPage";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SchedulePage />,
+    element: <Login />,
   },
   {
     element: <NavBar />,
