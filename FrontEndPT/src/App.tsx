@@ -4,11 +4,16 @@ import NavBar from "./components/Navbar";
 import PatientsPage from "./pages/PatientsPage";
 import OwnersPage from "./pages/OwnersPage";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
   },
   {
     element: <NavBar />,
