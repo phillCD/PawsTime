@@ -4,8 +4,11 @@ import ListCard from "../../components/ListCard";
 import { PatientDetail } from "../../components/PatientDetails";
 import SimpleButton from "../../components/SimpleButton";
 import AddIcon from '../../assets/add.svg';
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function OwnersPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-1 h-screen p-8 bg-slate-100 gap-5">
       <PatientDetail
@@ -22,7 +25,7 @@ export default function OwnersPage() {
             <p>Donos</p>
           </div>
           <div className="mr-3">
-            <SimpleButton icon={AddIcon}/>
+            <SimpleButton icon={AddIcon} onClick={() => navigate("/registerowner")}/>
           </div>
         </div>
         <div className="flex flex-1 flex-col bg-white mt-5 rounded-2xl p-6">
