@@ -60,6 +60,21 @@ export default function SchedulePage() {
         </Modal>
       )}
 
+      {isAddAppointmentModalVisible && (
+        <Modal onClickOut={() => setIsAddAppointmentModalVisible(false)}>
+          <div className="p-6 flex flex-1 flex-col gap-6 items-center justify-center">
+            <p>Marcar uma consulta</p>
+            <div className="flex flex-1 gap-6">
+              <div className="flex flex-1 flex-col gap-6">
+                <SelectComponent label="Paciente" />
+                <InputComponent label="Procedimento" />
+              </div>
+            </div>
+            <SimpleButton label="Cadastrar" />
+          </div>
+        </Modal>
+      )}
+
       <div className="flex h-screen p-8 bg-slate-100 gap-5">
         <div>
           <Calendar

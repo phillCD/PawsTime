@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import InputComponent from "../../components/Input";
 
-const OwnerRegister = () => {
+const Profile = () => {
   const navigate = useNavigate();
 
   return (
@@ -9,7 +9,7 @@ const OwnerRegister = () => {
       <div className="bg-white shadow rounded-lg p-8">
         <div className="flex flex-1 flex-col h-full items-center justify-center gap-8">
           <div>
-            <h1 className="flex text-2xl font-bold">Cadastro de dono</h1>
+            <h1 className="flex text-2xl font-bold">Detalhes de perfil</h1>
           </div>
           <div className="items grid grid-rows-3 grid-cols-2 gap-4">
             <InputComponent label="Nome" />
@@ -24,13 +24,13 @@ const OwnerRegister = () => {
           </div>
           <div className="w-full flex flex-1 items-center justify-center gap-8">
             <button className="p-2 bg-green-500 rounded-md hover:opacity-60">
-              <p className="text-white">Cadastrar</p>
+              <p className="text-white">Editar</p>
             </button>
             <button
               className="p-2 bg-red-500 rounded-md hover:opacity-60"
-              onClick={() => navigate("/owners")}
+              onClick={() => navigate(-1)}
             >
-              <p className="text-white">Cancelar</p>
+              <p className="text-white">Voltar</p>
             </button>
           </div>
         </div>
@@ -39,4 +39,4 @@ const OwnerRegister = () => {
   );
 };
 
-export default OwnerRegister;
+export default Profile;

@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import OwnerRegister from "./pages/OwnersRegistration";
 import PatientsRegister from "./pages/PatientsRegistration";
+import Profile from "./pages/Profile";
+import Enchiridion from "./pages/Enchiridion";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,15 @@ const router = createBrowserRouter([
       {
         path: "/registerpet",
         element: <PatientsRegister />,
-      }
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/enchiridion",
+        element: <Enchiridion />,
+      },
     ],
   },
 ]);

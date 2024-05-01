@@ -3,7 +3,7 @@ import "react-calendar/dist/Calendar.css";
 import ListCard from "../../components/ListCard";
 import { PatientDetail } from "../../components/PatientDetails";
 import SimpleButton from "../../components/SimpleButton";
-import AddIcon from '../../assets/add.svg';
+import AddIcon from "../../assets/add.svg";
 import { Navigate, useNavigate } from "react-router-dom";
 
 export default function OwnersPage() {
@@ -25,14 +25,16 @@ export default function OwnersPage() {
             <p>Donos</p>
           </div>
           <div className="mr-3">
-            <SimpleButton icon={AddIcon} onClick={() => navigate("/registerowner")}/>
+            <SimpleButton
+              icon={AddIcon}
+              onClick={() => navigate("/registerowner")}
+            />
           </div>
         </div>
         <div className="flex flex-1 flex-col bg-white mt-5 rounded-2xl p-6">
           <div className="flex flex-1 flex-col gap-2">
             <div className="flex flex-row w-full p-2 px-10 bg-slate-400 rounded-md items-center">
               <div className="flex flex-row flex-1 justify-between">
-                <p>ID</p>
                 <p>Nome</p>
                 <p>Telefone</p>
                 <p>Email</p>
@@ -46,63 +48,57 @@ export default function OwnersPage() {
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
             <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              breed="Nome do Dono"
+              petName="(48) 9 9999-999"
+              ownerName="teste@email.com"
             />
           </div>
         </div>
