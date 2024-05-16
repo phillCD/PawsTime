@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("schedules")
+@RequestMapping("schedule")
 public class ScheduleController {
     private ScheduleService service;
 
@@ -22,7 +22,7 @@ public class ScheduleController {
         }
     }
 
-    @PutMapping("{id}")
+    @PostMapping("{id}")
     public ResponseEntity<ScheduleRepresentation.ScheduleResponse> updateSchedule(@PathVariable Long id, @RequestBody ScheduleRepresentation.updateSchedule schedule){
         try{
             return ResponseEntity.ok().body(ScheduleRepresentation.ScheduleResponse.from(service.update(id, schedule)));
