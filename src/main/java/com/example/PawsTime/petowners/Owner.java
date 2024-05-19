@@ -1,13 +1,11 @@
 package com.example.PawsTime.petowners;
 import com.example.PawsTime.core.EntityId;
-import com.example.PawsTime.enums.Gender;
+import com.example.PawsTime.pet.Pet;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
 
 @Entity
 @AllArgsConstructor
@@ -19,7 +17,7 @@ public class Owner extends EntityId{
     private String name;
     @ManyToOne
     @JoinColumn(name = "pet_id", nullable = false)
-    private String pet_id;
+    private Pet pet_id;
     @Column(name = "cellphone")
     private String cellphone;
     @Column(name = "address")

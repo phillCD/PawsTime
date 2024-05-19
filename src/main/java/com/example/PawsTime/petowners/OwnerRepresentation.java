@@ -1,6 +1,7 @@
 package com.example.PawsTime.petowners;
 
 import com.example.PawsTime.enums.Gender;
+import com.example.PawsTime.pet.Pet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ public interface OwnerRepresentation {
         private String name;
         @NotNull
         @NotBlank
-        private String pet_id;
+        private Pet pet_id;
         @NotNull
         @NotBlank
         private String cellphone;
@@ -85,7 +86,7 @@ public interface OwnerRepresentation {
             return OwnerResponse.builder()
                     .id(owner.getId())
                     .name(owner.getName())
-                    .pet_id(owner.getPet_id())
+                    .pet_id(String.valueOf(owner.getPet_id()))
                     .cellphone(owner.getCellphone())
                     .address(owner.getAddress())
                     .document(owner.getDocument())

@@ -1,5 +1,6 @@
 package com.example.PawsTime.schedule;
 
+import com.example.PawsTime.clinic.Clinic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ public interface ScheduleRepresentation {
         private String user_id;
         @NotNull
         @NotEmpty
-        private String clinic_id;
+        private Clinic clinic_id;
         @NotNull
         @NotEmpty
         private String date_start;
@@ -90,7 +91,7 @@ public interface ScheduleRepresentation {
             return ScheduleResponse.builder()
                     .id(schedule.getId())
                     .user_id(schedule.getUser_id())
-                    .clinic_id(schedule.getClinic_id())
+                    .clinic_id(schedule.getClinic_id().toString())
                     .date_start(schedule.getDate_start())
                     .date_finish(schedule.getDate_finish())
                     .hour_start(schedule.getHour_start())

@@ -111,7 +111,7 @@ public interface UserRepresentation {
             return UserResponse.builder()
                     .id(user.getId())
                     .login(user.getLogin())
-                    .clinic_id(user.getClinicId())
+                    .clinic_id((Clinic) user.getClinics())
                     .name(user.getName())
                     .document(user.getDocument())
                     .birthdate(user.getBirthdate())

@@ -1,5 +1,6 @@
 package com.example.PawsTime.schedule;
 
+import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.core.EntityId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +21,7 @@ public class Schedule extends EntityId {
     private String user_id;
     @ManyToOne
     @JoinColumn(name = "clinic_id", nullable = false)
-    private String clinic_id;
+    private Clinic clinic_id;
     @Column(name = "date_start")
     private String date_start;
     @Column(name = "date_finish")

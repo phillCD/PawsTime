@@ -6,6 +6,7 @@ import com.example.PawsTime.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,8 +16,12 @@ import java.util.Set;
 @NoArgsConstructor
 public class User extends EntityId {
     @ManyToMany
-    @JoinColumn(name = "clinic_id", nullable = false)
-    private Clinic clinicId;
+
+    @JoinTable(
+            name = "user_clinic",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "clinic_id"))
+    private List<Clinic> clinics;
     @NonNull
     @Column(name = "name")
     private String name;

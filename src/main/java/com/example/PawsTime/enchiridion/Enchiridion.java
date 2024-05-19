@@ -1,6 +1,7 @@
 package com.example.PawsTime.enchiridion;
 
 import com.example.PawsTime.core.EntityId;
+import com.example.PawsTime.pet.Pet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NonNull;
@@ -10,9 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Enchiridion extends EntityId {
-    @OneToOne
-    @JoinColumn(name = "pet_id", nullable = false)
-    private Long petId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pet_id", referencedColumnName = "id")
+    private Pet petId;
     @NonNull
     @Column(name = "anamnese", nullable = false)
     private String anamnese;
