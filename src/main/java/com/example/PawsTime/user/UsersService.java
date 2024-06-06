@@ -9,20 +9,20 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UsersService {
     private ModelMapper modelMapper;
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<Users> getAllUsers() {
+        return usersRepository.findAll();
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public Users getUserById(Long id) {
+        return usersRepository.findById(id).orElse(null);
     }
 
-    public User createUser(UserRepresentation.UserCreate create) {
-        return userRepository.save(new User(
+    public Users createUser(UsersRepresentation.UserCreate create) {
+        return usersRepository.save(new Users(
                 create.getLogin(),
                 create.getClinicId(),
                 create.getName(),
@@ -38,16 +38,16 @@ public class UserService {
         ));
     }
 
-    public User update(Long id, UserRepresentation.UserUpdate entity) {
-        var dbEntity = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
+    public Users update(Long id, UsersRepresentation.UserUpdate entity) {
+        var dbEntity = usersRepository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
         modelMapper.map(entity, dbEntity);
 
-        return userRepository.save(dbEntity);
+        return usersRepository.save(dbEntity);
     }
 
-    public User delete(Long id) {
-        var dbEntity = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
-        userRepository.delete(dbEntity);
+    public Users delete(Long id) {
+        var dbEntity = usersRepository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
+        usersRepository.delete(dbEntity);
         return dbEntity;
     }
 }

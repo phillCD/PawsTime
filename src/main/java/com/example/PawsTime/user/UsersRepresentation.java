@@ -7,7 +7,7 @@ import lombok.*;
 import javax.validation.constraints.*;
 import java.util.Set;
 
-public interface UserRepresentation {
+public interface UsersRepresentation {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
@@ -107,7 +107,7 @@ public interface UserRepresentation {
         private String address;
 
 
-        public static UserResponse from(User user) {
+        public static UserResponse from(Users user) {
             return UserResponse.builder()
                     .id(user.getId())
                     .login(user.getLogin())

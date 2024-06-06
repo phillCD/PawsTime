@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends EntityId {
+public class Users extends EntityId {
     @ManyToMany
 
     @JoinTable(
@@ -54,7 +54,7 @@ public class User extends EntityId {
     @Column(name = "type")
     private Integer type;
 
-    public User(String login, Clinic clinicId, String name, String password, Set<String> type, String document, String birthdate, String address, Gender gender, String cellphone, String speciality, Boolean active) {
+    public Users(String login, Clinic clinicId, String name, String password, Set<String> type, String document, String birthdate, String address, Gender gender, String cellphone, String speciality, Boolean active) {
         super();
     }
 }
