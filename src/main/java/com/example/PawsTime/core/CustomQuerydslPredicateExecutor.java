@@ -6,6 +6,4 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public interface CustomQuerydslPredicateExecutor<T> extends QuerydslPredicateExecutor<T> {
-
-    List<T> findAll(Predicate predicate);
 }

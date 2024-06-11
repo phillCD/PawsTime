@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Owner extends EntityId{
     @Column(name = "name")
     private String name;
@@ -28,6 +28,5 @@ public class Owner extends EntityId{
     private String birthdate;
     @Column(name = "gender")
     private String gender;
-
 
 }
