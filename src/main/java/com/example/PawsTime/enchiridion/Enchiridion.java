@@ -3,13 +3,13 @@ package com.example.PawsTime.enchiridion;
 import com.example.PawsTime.core.EntityId;
 import com.example.PawsTime.pet.Pet;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Enchiridion extends EntityId {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pet_id", referencedColumnName = "id")
