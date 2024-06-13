@@ -86,7 +86,7 @@ public interface OwnerRepresentation {
             return OwnerResponse.builder()
                     .id(owner.getId())
                     .name(owner.getName())
-                    .pet_id(String.valueOf(owner.getPet_id()))
+                    .pet_id(String.valueOf(owner.getPet()))
                     .cellphone(owner.getCellphone())
                     .address(owner.getAddress())
                     .document(owner.getDocument())

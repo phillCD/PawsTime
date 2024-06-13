@@ -1,6 +1,7 @@
 package com.example.PawsTime.petowners;
 
 import com.example.PawsTime.exceptions.NotFoundException;
+import com.example.PawsTime.pet.Pet;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

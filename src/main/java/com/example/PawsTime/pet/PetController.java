@@ -1,10 +1,14 @@
 package com.example.PawsTime.pet;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("pet")
+@AllArgsConstructor
 public class PetController {
     private PetService service;
 
@@ -29,6 +33,11 @@ public class PetController {
         } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<PetRepresentation.PetResponse> createPet(@RequestBody PetRepresentation.createPet pet){
+        return ResponseEntity.ok().body(PetRepresentation.PetResponse.from(service.createPet(pet)));
     }
 
     @DeleteMapping("{id}")

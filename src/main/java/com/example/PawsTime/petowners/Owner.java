@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
+
 @Entity
 @Getter
 @Setter
@@ -16,8 +19,8 @@ public class Owner extends EntityId{
     @Column(name = "name")
     private String name;
     @ManyToOne
-    @JoinColumn(name = "pet_id", nullable = false)
-    private Pet pet_id;
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
     @Column(name = "cellphone")
     private String cellphone;
     @Column(name = "address")

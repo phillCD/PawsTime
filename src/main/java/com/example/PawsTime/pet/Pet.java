@@ -4,10 +4,7 @@ import com.example.PawsTime.breed.Breed;
 import com.example.PawsTime.core.EntityId;
 import com.example.PawsTime.enums.Gender;
 import com.example.PawsTime.petowners.Owner;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +23,7 @@ public class Pet extends EntityId {
     @OneToOne
     @JoinColumn(name = "breed_id")
     private Breed breed;
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "gender")
     private Gender gender;
     @Column(name = "size")

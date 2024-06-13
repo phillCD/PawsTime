@@ -1,10 +1,14 @@
 package com.example.PawsTime.pet;
 
 import com.example.PawsTime.exceptions.NotFoundException;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class PetService {
     private ModelMapper modelMapper;
     private PetRepository petRepository;
@@ -37,4 +41,5 @@ public class PetService {
         petRepository.delete(dbEntity);
         return dbEntity;
     }
+
 }
