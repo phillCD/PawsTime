@@ -2,6 +2,7 @@ package com.example.PawsTime.category;
 
 import com.example.PawsTime.exceptions.NotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,10 +10,13 @@ import java.util.List;
 @Service
 public class CategoryService {
 
+    @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }

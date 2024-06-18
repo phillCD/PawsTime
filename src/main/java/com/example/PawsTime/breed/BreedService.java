@@ -2,6 +2,7 @@ package com.example.PawsTime.breed;
 
 import com.example.PawsTime.exceptions.NotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +10,10 @@ import java.util.List;
 @Service
 public class BreedService {
 
+    @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
     private BreedRepository breedRepository;
 
     public List<Breed> getAllBreeds() {

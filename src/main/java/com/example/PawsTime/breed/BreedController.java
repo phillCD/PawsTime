@@ -1,14 +1,15 @@
 package com.example.PawsTime.breed;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@ComponentScan
 @RestController
 @RequestMapping("breed")
+@AllArgsConstructor
 public class BreedController {
 
     private BreedService service;

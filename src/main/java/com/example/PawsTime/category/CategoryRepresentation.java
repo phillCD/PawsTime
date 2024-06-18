@@ -1,13 +1,8 @@
 package com.example.PawsTime.category;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public interface CategoryRepresentation {
@@ -15,6 +10,8 @@ public interface CategoryRepresentation {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @Getter
+    @Setter
     @Data
     class createCategory{
         @NotBlank
@@ -25,6 +22,8 @@ public interface CategoryRepresentation {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @Setter
+    @Getter
     @Data
     class updateCategory{
         @NotBlank
@@ -36,11 +35,13 @@ public interface CategoryRepresentation {
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
+    @Setter
+    @Getter
     class categoryResponse{
         private Long id;
         private String name;
 
-        public static categoryResponse fromCategory(Category category){
+        public static categoryResponse from(Category category){
             return categoryResponse.builder()
                     .id(category.getId())
                     .name(category.getName())

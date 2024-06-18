@@ -1,10 +1,7 @@
 package com.example.PawsTime.breed;
 
 import com.example.PawsTime.category.Category;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,6 +10,8 @@ public interface BreedRepresentation {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @Getter
+    @Setter
     @Data
     class createBreed{
         @NotNull
@@ -27,6 +26,8 @@ public interface BreedRepresentation {
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
+    @Setter
+    @Getter
     class updateBreed{
         @NotNull
         @NotEmpty
@@ -40,6 +41,8 @@ public interface BreedRepresentation {
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
+    @Getter
+    @Setter
     class breedResponse{
         private Long id;
         private String name;
