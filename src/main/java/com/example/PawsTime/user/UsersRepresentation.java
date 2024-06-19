@@ -5,118 +5,84 @@ import com.example.PawsTime.enums.Gender;
 import lombok.*;
 
 import javax.validation.constraints.*;
+import java.util.List;
 import java.util.Set;
 
 public interface UsersRepresentation {
+
+    @Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    @Data
-    class UserCreate{
-        @NotNull
-        @Size(min = 3, max = 50)
-        private String login;
-
-        @NotNull
-        @NotEmpty
-        private Clinic clinicId;
-
-        @NotNull(message = "Name is required")
-        @NotEmpty(message = "Name is required")
-        private String name;
-
-        @NotNull
-        @Size(min = 6, max = 40)
-        private String password;
-
-        private Set<String> type;
-
-        @NotNull(message = "Document is required")
-        @NotEmpty(message = "Document is required")
-        private String document;
-
-        @NotNull(message = "Birthdate is required")
-        @NotEmpty(message = "Birthdate is required")
-        private String birthdate;
-
-        @NotNull
-        @NotBlank
-        private String address;
-
-        @NotBlank
-        @NotNull
-        private Gender gender;
-
-        @NotNull
-        @NotBlank
-        private String cellphone;
-
-        @NotNull
-        @NotBlank
-        private String speciality;
-
-        @NotNull
-        @NotBlank
-        private Boolean active;
-
-    }
-
-    class UserUpdate {
-        @NotNull
-        @Size(min = 3, max = 50)
-        private String login;
-
-        @NotNull
-        @NotEmpty
-        private Clinic clinicId;
-
-        @NotNull(message = "Name is required")
-        @NotEmpty(message = "Name is required")
-        private String name;
-
-        @NotNull
-        @Size(min = 6, max = 40)
-        private String password;
-
-        private Set<String> type;
-
-        @NotNull(message = "Document is required")
-        @NotEmpty(message = "Document is required")
-        private String document;
-
-        @NotNull(message = "Birthdate is required")
-        @NotEmpty(message = "Birthdate is required")
-        private String birthdate;
-
-        @NotNull
-        @NotBlank
-        private String address;
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
     class UserResponse {
         private Long id;
-        private String login;
-        private Clinic clinic_id;
+        private List<Clinic> clinics_id;
         private String name;
-        private String document;
         private String birthdate;
+        private Gender gender;
+        private String cellphone;
+        private String document;
         private String address;
-
+        private String speciality;
+        private Boolean active;
+        private String login;
+        private String password;
+        private String type;
 
         public static UserResponse from(Users user) {
             return UserResponse.builder()
                     .id(user.getId())
-                    .login(user.getLogin())
-                    .clinic_id((Clinic) user.getClinics())
+                    .clinics_id(user.getClinics_id())
                     .name(user.getName())
-                    .document(user.getDocument())
                     .birthdate(user.getBirthdate())
+                    .gender(user.getGender())
+                    .cellphone(user.getCellphone())
+                    .document(user.getDocument())
                     .address(user.getAddress())
+                    .speciality(user.getSpeciality())
+                    .active(user.getActive())
+                    .login(user.getLogin())
+                    .password(user.getPassword())
+                    .type(user.getType())
                     .build();
         }
+    }
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class UserCreate {
+        private List<Clinic> clinics_id;
+        private String name;
+        private String birthdate;
+        private Gender gender;
+        private String cellphone;
+        private String document;
+        private String address;
+        private String speciality;
+        private Boolean active;
+        private String login;
+        private String password;
+        private String type;
+    }
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class UserUpdate {
+        private List<Clinic> clinics_id;
+        private String name;
+        private String birthdate;
+        private Gender gender;
+        private String cellphone;
+        private String document;
+        private String address;
+        private String speciality;
+        private Boolean active;
+        private String login;
+        private String password;
+        private String type;
     }
 }

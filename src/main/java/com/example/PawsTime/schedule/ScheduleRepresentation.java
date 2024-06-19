@@ -33,7 +33,7 @@ public interface ScheduleRepresentation {
     @Data
     class updateSchedule{
         private Users user_id;
-        private String clinic_id;
+        private Clinic clinic_id;
         private String date_start;
         private String date_finish;
         private String hour_start;
@@ -49,7 +49,7 @@ public interface ScheduleRepresentation {
     class ScheduleResponse{
         private Long id;
         private Users user_id;
-        private String clinic_id;
+        private Clinic clinic_id;
         private String date_start;
         private String date_finish;
         private String hour_start;
@@ -61,7 +61,7 @@ public interface ScheduleRepresentation {
             return ScheduleResponse.builder()
                     .id(schedule.getId())
                     .user_id(schedule.getUser_id())
-                    .clinic_id(schedule.getClinic_id().toString())
+                    .clinic_id(schedule.getClinic_id())
                     .date_start(schedule.getDate_start())
                     .date_finish(schedule.getDate_finish())
                     .hour_start(schedule.getHour_start())

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("schedule")
 @AllArgsConstructor
@@ -11,8 +13,8 @@ public class ScheduleController {
     private ScheduleService service;
 
     @GetMapping
-    public ResponseEntity<ScheduleRepresentation.ScheduleResponse> getAllSchedules(){
-        return ResponseEntity.ok((ScheduleRepresentation.ScheduleResponse) service.getAllSchedules().stream().map(ScheduleRepresentation.ScheduleResponse::from).toList());
+    public ResponseEntity<List<ScheduleRepresentation.ScheduleResponse>> getAllSchedules(){
+        return ResponseEntity.ok().body(service.getAllSchedules().stream().map(ScheduleRepresentation.ScheduleResponse::from).toList());
     }
 
     @GetMapping("{id}")

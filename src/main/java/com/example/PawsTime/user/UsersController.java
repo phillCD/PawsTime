@@ -1,5 +1,7 @@
 package com.example.PawsTime.user;
 
+import com.example.PawsTime.exceptions.NotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users")
+@AllArgsConstructor
 public class UsersController {
     private UsersService service;
 
@@ -16,20 +19,25 @@ public class UsersController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UsersRepresentation.UserResponse> getUserById(Long id){
+    public ResponseEntity<UsersRepresentation.UserResponse> getUserById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(UsersRepresentation.UserResponse.from(service.getUserById(id)));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.noContent().build();
         }
     }
 
-    @PutMapping("{id}")
+    @PostMapping
+    public ResponseEntity<UsersRepresentation.UserResponse> createUser(@RequestBody UsersRepresentation.UserCreate user){
+        return ResponseEntity.ok(UsersRepresentation.UserResponse.from(service.createUser(user)));
+    }
+
+    @PostMapping("{id}")
     public ResponseEntity<UsersRepresentation.UserResponse> updateUser(@PathVariable Long id, @RequestBody UsersRepresentation.UserUpdate user){
         try{
-            return ResponseEntity.ok().body(UsersRepresentation.UserResponse.from(service.update(id, user)));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(UsersRepresentation.UserResponse.from(service.update(id, user)));
+        } catch (NotFoundException e) {
+            return ResponseEntity.noContent().build();
         }
     }
 

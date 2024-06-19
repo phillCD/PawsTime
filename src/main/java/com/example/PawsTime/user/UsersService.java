@@ -3,14 +3,17 @@ package com.example.PawsTime.user;
 import com.example.PawsTime.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class UsersService {
+    @Autowired
     private ModelMapper modelMapper;
+    @Autowired
     private UsersRepository usersRepository;
 
     public List<Users> getAllUsers() {
@@ -23,18 +26,18 @@ public class UsersService {
 
     public Users createUser(UsersRepresentation.UserCreate create) {
         return usersRepository.save(new Users(
-                create.getLogin(),
-                create.getClinicId(),
+                create.getClinics_id(),
                 create.getName(),
-                create.getPassword(),
-                create.getType(),
-                create.getDocument(),
                 create.getBirthdate(),
-                create.getAddress(),
                 create.getGender(),
                 create.getCellphone(),
+                create.getDocument(),
+                create.getAddress(),
                 create.getSpeciality(),
-                create.getActive()
+                create.getActive(),
+                create.getLogin(),
+                create.getPassword(),
+                create.getType()
         ));
     }
 
