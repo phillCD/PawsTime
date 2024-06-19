@@ -3,6 +3,8 @@ package com.example.PawsTime.pet;
 import com.example.PawsTime.breed.Breed;
 import com.example.PawsTime.enums.Gender;
 import com.example.PawsTime.petowners.Owner;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,14 +23,13 @@ public interface PetRepresentation {
         @NotNull
         @NotEmpty
         private String name;
-        @NotNull
-        @NotEmpty
-        private String owner;
+        private Owner owner;
         @NotNull
         @NotEmpty
         private Breed breed;
         @NotNull
         @NotEmpty
+        @Enumerated(EnumType.STRING)
         private Gender gender;
         @NotNull
         @NotEmpty
@@ -49,14 +50,13 @@ public interface PetRepresentation {
         @NotNull
         @NotEmpty
         private String name;
-        @NotNull
-        @NotEmpty
-        private String owner;
+        private Owner owner;
         @NotNull
         @NotEmpty
         private Breed breed;
         @NotNull
         @NotEmpty
+        @Enumerated(EnumType.STRING)
         private Gender gender;
         @NotNull
         @NotEmpty
@@ -76,7 +76,7 @@ public interface PetRepresentation {
     class PetResponse{
         private Long id;
         private String name;
-        private String owner;
+        private Owner owner;
         private Breed breed;
         private Gender gender;
         private String size;

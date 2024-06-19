@@ -3,14 +3,16 @@ package com.example.PawsTime.pet;
 import com.example.PawsTime.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class PetService {
+    @Autowired
     private ModelMapper modelMapper;
+    @Autowired
     private PetRepository petRepository;
 
     public List<Pet> getAllPets() {return petRepository.findAll();}

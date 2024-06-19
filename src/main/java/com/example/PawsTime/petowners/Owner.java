@@ -1,5 +1,6 @@
 package com.example.PawsTime.petowners;
 import com.example.PawsTime.core.EntityId;
+import com.example.PawsTime.enums.Gender;
 import com.example.PawsTime.pet.Pet;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,9 +19,9 @@ import java.util.List;
 public class Owner extends EntityId{
     @Column(name = "name")
     private String name;
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "pet_id")
-    private Pet pet;
+    private List<Pet> pet;
     @Column(name = "cellphone")
     private String cellphone;
     @Column(name = "address")
@@ -29,7 +30,8 @@ public class Owner extends EntityId{
     private String document;
     @Column(name = "birthdate")
     private String birthdate;
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private String gender;
+    private Gender gender;
 
 }

@@ -18,7 +18,7 @@ public class PetController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<PetRepresentation.PetResponse> getPetById(Long id){
+    public ResponseEntity<PetRepresentation.PetResponse> getPetById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(PetRepresentation.PetResponse.from(service.getPetById(id)));
         } catch (Exception e){

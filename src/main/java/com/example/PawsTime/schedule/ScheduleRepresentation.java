@@ -1,6 +1,8 @@
 package com.example.PawsTime.schedule;
 
 import com.example.PawsTime.clinic.Clinic;
+import com.example.PawsTime.petowners.Owner;
+import com.example.PawsTime.user.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,29 +17,13 @@ public interface ScheduleRepresentation {
     @NoArgsConstructor
     @Data
     class createSchedule{
-        @NotNull
-        @NotEmpty
-        private String user_id;
-        @NotNull
-        @NotEmpty
+        private Users user_id;
         private Clinic clinic_id;
-        @NotNull
-        @NotEmpty
         private String date_start;
-        @NotNull
-        @NotEmpty
         private String date_finish;
-        @NotNull
-        @NotEmpty
         private String hour_start;
-        @NotNull
-        @NotEmpty
         private String hour_finish;
-        @NotNull
-        @NotEmpty
         private String horary;
-        @NotNull
-        @NotEmpty
         private String duration;
     }
 
@@ -46,29 +32,13 @@ public interface ScheduleRepresentation {
     @NoArgsConstructor
     @Data
     class updateSchedule{
-        @NotNull
-        @NotEmpty
-        private String user_id;
-        @NotNull
-        @NotEmpty
+        private Users user_id;
         private String clinic_id;
-        @NotNull
-        @NotEmpty
         private String date_start;
-        @NotNull
-        @NotEmpty
         private String date_finish;
-        @NotNull
-        @NotEmpty
         private String hour_start;
-        @NotNull
-        @NotEmpty
         private String hour_finish;
-        @NotNull
-        @NotEmpty
         private String horary;
-        @NotNull
-        @NotEmpty
         private String duration;
     }
 
@@ -78,7 +48,7 @@ public interface ScheduleRepresentation {
     @Data
     class ScheduleResponse{
         private Long id;
-        private String user_id;
+        private Users user_id;
         private String clinic_id;
         private String date_start;
         private String date_finish;

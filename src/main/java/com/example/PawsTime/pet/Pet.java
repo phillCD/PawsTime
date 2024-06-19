@@ -18,12 +18,13 @@ import lombok.Setter;
 public class Pet extends EntityId {
     @Column(name = "name")
     private String name;
-    @Column(name = "owner_id")
-    private String owner;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+    @ManyToOne
     @JoinColumn(name = "breed_id")
     private Breed breed;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
     @Column(name = "size")

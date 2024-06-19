@@ -2,6 +2,8 @@ package com.example.PawsTime.petowners;
 
 import com.example.PawsTime.enums.Gender;
 import com.example.PawsTime.pet.Pet;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public interface OwnerRepresentation {
 
@@ -20,9 +23,7 @@ public interface OwnerRepresentation {
         @NotNull
         @NotBlank
         private String name;
-        @NotNull
-        @NotBlank
-        private Pet pet_id;
+        private List<Pet> pet_id;
         @NotNull
         @NotBlank
         private String cellphone;
@@ -37,7 +38,8 @@ public interface OwnerRepresentation {
         private String birthdate;
         @NotNull
         @NotBlank
-        private String gender;
+        @Enumerated(EnumType.STRING)
+        private Gender gender;
     }
 
     @Builder
@@ -48,9 +50,7 @@ public interface OwnerRepresentation {
         @NotNull
         @NotBlank
         private String name;
-        @NotNull
-        @NotBlank
-        private String pet_id;
+        private List<Pet> pet_id;
         @NotNull
         @NotBlank
         private String cellphone;
@@ -65,6 +65,7 @@ public interface OwnerRepresentation {
         private String birthdate;
         @NotNull
         @NotBlank
+        @Enumerated(EnumType.STRING)
         private Gender gender;
     }
 
@@ -75,7 +76,7 @@ public interface OwnerRepresentation {
     class OwnerResponse {
         private Long id;
         private String name;
-        private String pet_id;
+        private List<Pet> pet_id;
         private String cellphone;
         private String address;
         private String document;
@@ -86,12 +87,12 @@ public interface OwnerRepresentation {
             return OwnerResponse.builder()
                     .id(owner.getId())
                     .name(owner.getName())
-                    .pet_id(String.valueOf(owner.getPet()))
+                    .pet_id(owner.getPet())
                     .cellphone(owner.getCellphone())
                     .address(owner.getAddress())
                     .document(owner.getDocument())
                     .birthdate(owner.getBirthdate())
-                    .gender(Gender.valueOf(owner.getGender()))
+                    .gender(owner.getGender())
                     .build();
         }
     }

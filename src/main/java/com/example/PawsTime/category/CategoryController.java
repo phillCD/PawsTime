@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("categories")
 @AllArgsConstructor
@@ -12,22 +15,20 @@ public class CategoryController {
 
     private CategoryService service;
 
-    @GetMapping("teste")
-    public String teste(){
-        return "teste";
-    }
-
     @GetMapping
-    public ResponseEntity<CategoryRepresentation.categoryResponse> getAllCategories(){
-        return ResponseEntity.ok((CategoryRepresentation.categoryResponse) service.getAllCategories().stream().map(CategoryRepresentation.categoryResponse::from).toList());
+    public ResponseEntity<List<CategoryRepresentation.categoryResponse>> getAllCategories(){
+        List<CategoryRepresentation.categoryResponse> categories = service.getAllCategories().stream()
+                .map(CategoryRepresentation.categoryResponse::from)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(categories);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CategoryRepresentation.categoryResponse> getCategoryById(Long id){
+    public ResponseEntity<CategoryRepresentation.categoryResponse> getCategoryById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(CategoryRepresentation.categoryResponse.from(service.getCategoryById(id)));
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
         }
     }
 
@@ -44,8 +45,8 @@ public class CategoryController {
     public ResponseEntity<CategoryRepresentation.categoryResponse> updateCategory(@PathVariable Long id, @RequestBody CategoryRepresentation.updateCategory category){
         try{
             return ResponseEntity.ok().body(CategoryRepresentation.categoryResponse.from(service.update(id, category)));
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
         }
     }
 

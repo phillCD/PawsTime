@@ -1,4 +1,4 @@
-package com.example.PawsTime.core;
+package com.example.PawsTime.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

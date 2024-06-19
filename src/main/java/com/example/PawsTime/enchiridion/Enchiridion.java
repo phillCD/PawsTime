@@ -11,11 +11,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Enchiridion extends EntityId {
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_id", referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "pet_id")
     private Pet petId;
-    @NonNull
-    @Column(name = "anamnese", nullable = false)
+    @Column(name = "anamnese")
     private String anamnese;
     @Column(name = "prescription")
     private String prescription;

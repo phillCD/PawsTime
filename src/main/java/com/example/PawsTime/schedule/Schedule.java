@@ -2,10 +2,8 @@ package com.example.PawsTime.schedule;
 
 import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.core.EntityId;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.example.PawsTime.user.Users;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +15,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Schedule extends EntityId {
-    @Column(name = "user_id")
-    private String user_id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user_id;
     @ManyToOne
-    @JoinColumn(name = "clinic_id", nullable = false)
+    @JoinColumn(name = "clinic_id")
     private Clinic clinic_id;
     @Column(name = "date_start")
     private String date_start;

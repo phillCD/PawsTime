@@ -2,12 +2,17 @@ package com.example.PawsTime.enchiridion;
 
 import com.example.PawsTime.exceptions.NotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EnchiridionService {
 
+    @Autowired
     private ModelMapper modelMapper;
+    @Autowired
     private EnchiridionRepository enchiridionRepository;
 
     public List<Enchiridion> getAllEnchiridions() {return enchiridionRepository.findAll();}

@@ -1,5 +1,6 @@
 package com.example.PawsTime.breed;
 
+import com.example.PawsTime.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class BreedController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<BreedRepresentation.breedResponse> getBreedById(Long id){
+    public ResponseEntity<BreedRepresentation.breedResponse> getBreedById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(BreedRepresentation.breedResponse.fromBreed(service.getBreedById(id)));
         } catch (Exception e){
@@ -29,25 +30,25 @@ public class BreedController {
     }
 
     @PostMapping
-    public ResponseEntity<BreedRepresentation.breedResponse> createBreed(BreedRepresentation.createBreed breed){
+    public ResponseEntity<BreedRepresentation.breedResponse> createBreed(@RequestBody BreedRepresentation.createBreed breed){
         try{
             return ResponseEntity.ok().body(BreedRepresentation.breedResponse.fromBreed(service.createBreed(breed)));
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
         }
     }
 
     @PostMapping("{id}")
-    public ResponseEntity<BreedRepresentation.breedResponse> updateBreed(Long id, BreedRepresentation.updateBreed breed){
+    public ResponseEntity<BreedRepresentation.breedResponse> updateBreed(@PathVariable Long id,@RequestBody BreedRepresentation.updateBreed breed){
         try{
             return ResponseEntity.ok().body(BreedRepresentation.breedResponse.fromBreed(service.update(id, breed)));
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
         }
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<BreedRepresentation.breedResponse> deleteBreed(Long id){
+    public ResponseEntity<BreedRepresentation.breedResponse> deleteBreed(@PathVariable Long id){
         service.delete(id);
 
         return ResponseEntity.noContent().build();

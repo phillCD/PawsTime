@@ -1,10 +1,13 @@
 package com.example.PawsTime.enchiridion;
 
+import com.example.PawsTime.exceptions.NotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("enchiridion")
+@AllArgsConstructor
 public class EnchiridionController {
     private EnchiridionService service;
 
@@ -14,11 +17,11 @@ public class EnchiridionController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<EnchiridionRepresentation.enchiridionResponse> getEnchiridionById(Long id){
+    public ResponseEntity<EnchiridionRepresentation.enchiridionResponse> getEnchiridionById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(EnchiridionRepresentation.enchiridionResponse.fromEnchiridion(service.getEnchiridionById(id)));
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
         }
     }
 
