@@ -16,7 +16,7 @@ public interface UsersRepresentation {
     @NoArgsConstructor
     class UserResponse {
         private Long id;
-        private List<Clinic> clinics_id;
+        private Clinic clinics_id;
         private String name;
         private String birthdate;
         private Gender gender;
@@ -53,7 +53,7 @@ public interface UsersRepresentation {
     @AllArgsConstructor
     @NoArgsConstructor
     class UserCreate {
-        private List<Clinic> clinics_id;
+        private Clinic clinics_id;
         private String name;
         private String birthdate;
         private Gender gender;
@@ -72,7 +72,7 @@ public interface UsersRepresentation {
     @AllArgsConstructor
     @NoArgsConstructor
     class UserUpdate {
-        private List<Clinic> clinics_id;
+        private Clinic clinics_id;
         private String name;
         private String birthdate;
         private Gender gender;

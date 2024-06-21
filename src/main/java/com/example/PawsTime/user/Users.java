@@ -15,12 +15,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users extends EntityId {
-    @ManyToMany
-    @JoinTable(
-            name = "user_clinic",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "clinic_id"))
-    private List<Clinic> clinics_id;
+    @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private Clinic clinics_id;
     @Column(name = "name")
     private String name;
     @Column(name = "birth_date")

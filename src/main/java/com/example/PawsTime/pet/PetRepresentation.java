@@ -31,11 +31,7 @@ public interface PetRepresentation {
         @NotEmpty
         @Enumerated(EnumType.STRING)
         private Gender gender;
-        @NotNull
-        @NotEmpty
         private String size;
-        @NotNull
-        @NotEmpty
         private String weight;
         @NotNull
         @NotEmpty
@@ -58,11 +54,7 @@ public interface PetRepresentation {
         @NotEmpty
         @Enumerated(EnumType.STRING)
         private Gender gender;
-        @NotNull
-        @NotEmpty
         private String size;
-        @NotNull
-        @NotEmpty
         private String weight;
         @NotNull
         @NotEmpty
