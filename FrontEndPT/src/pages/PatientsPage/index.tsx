@@ -5,9 +5,23 @@ import { PatientDetail } from "../../components/PatientDetails";
 import SimpleButton from "../../components/SimpleButton";
 import AddIcon from "../../assets/add.svg";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchGet } from "../../service/api";
 
 export default function PatientsPage() {
   const navigate = useNavigate();
+
+  const [patientList, setPatientList] = useState<any[]>([]);
+
+  const getPatients = async () => {
+    const res = await fetchGet('pet');
+    setPatientList(res);
+  }
+
+  useEffect(() => {
+    getPatients();
+  }, [])
+
 
   return (
     <div className="flex flex-1 h-screen p-8 bg-slate-100 gap-5">
@@ -40,72 +54,14 @@ export default function PatientsPage() {
                 <p>Nome do dono</p>
               </div>
             </div>
-            <ListCard
+            {patientList.map((item) => (
+              <ListCard
               id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
+              petName={item.name} 
+              breed={item.breed}
+              ownerName={item.owner}
             />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
-            <ListCard
-              id="ID"
-              petName="Nome do Animal"
-              breed="Raça"
-              ownerName="Nome do Dono"
-            />
+            ))}
           </div>
         </div>
       </div>

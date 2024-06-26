@@ -4,10 +4,25 @@ import ListCard from "../../components/ListCard";
 import { PatientDetail } from "../../components/PatientDetails";
 import SimpleButton from "../../components/SimpleButton";
 import AddIcon from "../../assets/add.svg";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchGet } from "../../service/api";
 
 export default function OwnersPage() {
   const navigate = useNavigate();
+
+  const [ownerList, setOwnerList] = useState<any[]>([]);
+
+  const getOwners = async () => {
+    const res = await fetchGet('owners');
+    console.log(res);
+    
+    setOwnerList(res);
+  }
+
+  useEffect(() => {
+    getOwners();
+  }, [])
 
   return (
     <div className="flex flex-1 h-screen p-8 bg-slate-100 gap-5">
@@ -40,66 +55,15 @@ export default function OwnersPage() {
                 <p>Email</p>
               </div>
             </div>
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
-            <ListCard
-              id="ID"
-              breed="Nome do Dono"
-              petName="(48) 9 9999-999"
-              ownerName="teste@email.com"
-            />
+            {ownerList.map((item) => 
+              <ListCard
+              key={item.id}
+                id="ID"
+                breed={item.name}
+                petName={item.cellphone}
+                ownerName={item.document}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -3,14 +3,16 @@ package com.example.PawsTime.schedule;
 import com.example.PawsTime.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ScheduleService {
+    @Autowired
     private ModelMapper modelMapper;
+    @Autowired
     private ScheduleRepository scheduleRepository;
 
     public List<Schedule> getAllSchedules() {

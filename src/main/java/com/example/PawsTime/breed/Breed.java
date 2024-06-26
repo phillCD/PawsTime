@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Breed extends EntityId {
+public class  Breed extends EntityId {
     @Column(name = "name")
     private String name;
     @ManyToOne

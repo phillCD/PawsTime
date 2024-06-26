@@ -1,20 +1,28 @@
 package com.example.PawsTime.pet;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("pet")
+@AllArgsConstructor
 public class PetController {
     private PetService service;
 
     @GetMapping
-    public ResponseEntity<PetRepresentation.PetResponse> getAllPets(){
-        return ResponseEntity.ok((PetRepresentation.PetResponse) service.getAllPets().stream().map(PetRepresentation.PetResponse::from).toList());
+    public ResponseEntity<List<PetRepresentation.PetResponse>> getAllPets(){
+        return ResponseEntity.ok(service.getAllPets().stream().map(PetRepresentation.PetResponse::from).collect(Collectors.toList()));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<PetRepresentation.PetResponse> getPetById(Long id){
+    public ResponseEntity<PetRepresentation.PetResponse> getPetById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(PetRepresentation.PetResponse.from(service.getPetById(id)));
         } catch (Exception e){
@@ -29,6 +37,11 @@ public class PetController {
         } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<List<PetRepresentation.PetResponse>> createPet(@RequestBody List<PetRepresentation.createPet> pet){
+        return ResponseEntity.ok().body(Collections.singletonList(PetRepresentation.PetResponse.from(service.createPet((PetRepresentation.createPet) pet))));
     }
 
     @DeleteMapping("{id}")
