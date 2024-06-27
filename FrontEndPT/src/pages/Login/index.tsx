@@ -24,7 +24,7 @@ export default function Login() {
         const data = await response.json();
         localStorage.setItem("userId", data.id);
         localStorage.setItem("clinicId", data.clinics_id.id);
-        console.log(data.clinics_id);
+        console.log(data.clinics_id.id);
         navigate("/schedule");
       } else {
         setError("Login failed. Please check your credentials.");
@@ -58,6 +58,7 @@ export default function Login() {
           />
           <InputComponent
             label="Senha"
+            type="password"
             id="password"
             name="password"
             onChange={(e: { target: { value: SetStateAction<string> } }) =>

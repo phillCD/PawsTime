@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Key, MouseEvent, useEffect, useState } from "react";
 import "../../index.css";
 import Calendar from "react-calendar";
 import { Value } from "../../@types/types";
@@ -13,6 +13,10 @@ import SelectComponent from "../../components/Select";
 
 export default function SchedulePage() {
   const [value, onChange] = useState<Value>(new Date());
+  const [pets, setPets] = useState<any[]>([]);
+  const [selectedPet, setSelectedPet] = useState<any>("");
+  const [procedure, setProcedure] = useState(''); 
+
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
@@ -23,6 +27,56 @@ export default function SchedulePage() {
   const day = dateObj.getUTCDate();
   const month = dateObj.toLocaleString("default", { month: "long" }); // months from 1-12
   const year = dateObj.getUTCFullYear();
+
+  useEffect(() => {
+    fetch('http://localhost:8080/pet') // Adjust the endpoint as needed
+      .then(response => response.json())
+      .then(data => {
+        setPets(data);
+      })
+      .catch(error => console.error('Error fetching owners:', error));
+  }, []);
+
+  console.log(pets);
+
+  const handlePetChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const petId = parseInt(event.target.value, 10);
+    const selectedPet = pets.find(o => o.id === petId);
+    if (selectedPet) {
+      setSelectedPet(selectedPet);
+    }
+  }
+
+  const handleProcedureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setProcedure(event.target.value);
+  };
+
+  // Handler for posting the appointment
+  const handlePostAppointment = async () => {
+    const appointmentData = {
+      petId: selectedPet,
+      procedure: procedure,
+    };
+  
+    try {
+      const response = await fetch('https://localhost:8080/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error posting the appointment:', error);
+    }
+  };
 
   return (
     <>
@@ -51,26 +105,22 @@ export default function SchedulePage() {
             <p>Marcar uma consulta</p>
             <div className="flex flex-1 gap-6">
               <div className="flex flex-1 flex-col gap-6">
-                <SelectComponent label="Paciente" />
-                <InputComponent label="Procedimento" />
+              <label htmlFor="pet-select">Paciente</label>
+              <div>
+                  <select className="form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="pet-select" onChange={handlePetChange} value={selectedPet?.id || ''}>
+                    <option value=""></option>
+                    {pets.map((pet) => (
+                      <option key={pet.id} value={pet.id}>
+                        {pet.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <InputComponent label="Procedimento" values={procedure} onChange={handleProcedureChange}/>
               </div>
             </div>
-            <SimpleButton label="Cadastrar" />
-          </div>
-        </Modal>
-      )}
-
-      {isAddAppointmentModalVisible && (
-        <Modal onClickOut={() => setIsAddAppointmentModalVisible(false)}>
-          <div className="p-6 flex flex-1 flex-col gap-6 items-center justify-center">
-            <p>Marcar uma consulta</p>
-            <div className="flex flex-1 gap-6">
-              <div className="flex flex-1 flex-col gap-6">
-                <SelectComponent label="Paciente" />
-                <InputComponent label="Procedimento" />
-              </div>
-            </div>
-            <SimpleButton label="Cadastrar" />
+            <SimpleButton label="Cadastrar" onClick={handlePostAppointment}/>
           </div>
         </Modal>
       )}

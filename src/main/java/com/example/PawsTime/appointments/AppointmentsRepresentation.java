@@ -20,23 +20,11 @@ public interface AppointmentsRepresentation {
     @NoArgsConstructor
     @Data
     class createAppointments{
-        @NotNull
-        @NotEmpty
         private Schedule schedule_id;
-        @NotNull
-        @NotEmpty
         private Pet pet_id;
-        @NotNull
-        @NotEmpty
         private Users user_id;
-        @NotNull
-        @NotEmpty
         private String procedure;
-        @NotNull
-        @NotEmpty
         private String date;
-        @NotNull
-        @NotEmpty
         private String hour;
     }
 
@@ -45,23 +33,11 @@ public interface AppointmentsRepresentation {
     @NoArgsConstructor
     @Data
     class updateAppointments{
-        @NotNull
-        @NotEmpty
         private Schedule schedule_id;
-        @NotNull
-        @NotEmpty
         private Pet pet_id;
-        @NotNull
-        @NotEmpty
         private Users user_id;
-        @NotNull
-        @NotEmpty
         private String procedure;
-        @NotNull
-        @NotEmpty
         private String date;
-        @NotNull
-        @NotEmpty
         private String hour;
     }
 

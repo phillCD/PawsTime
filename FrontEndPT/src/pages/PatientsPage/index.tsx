@@ -11,12 +11,24 @@ import { fetchGet } from "../../service/api";
 export default function PatientsPage() {
   const navigate = useNavigate();
   const { clinicId } = useParams();
+  
 
-  const [patientList, setPatientList] = useState<[]>([]);
+  const [patientList, setPatientList] = useState<any[]>([]);
 
   const getPatients = async () => {
-    const res = await fetchGet('pet');
-    setPatientList(res);
+    try {
+      const res = await fetchGet(`pet/clinics/${localStorage.getItem('clinicId')}`);
+      // Check if the response is an array before setting the state
+      if (Array.isArray(res)) {
+        setPatientList(res);
+      } else {
+        console.error('Expected an array but got:', typeof res);
+        setPatientList([]); // Set to empty array if response is not an array
+      }
+    } catch (error) {
+      console.error('Error fetching patients:', error);
+      setPatientList([]); // Set to empty array in case of error
+    }
   }
 
   console.log(patientList);

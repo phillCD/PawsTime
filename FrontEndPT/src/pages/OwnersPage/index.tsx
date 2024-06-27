@@ -15,7 +15,7 @@ export default function OwnersPage() {
   const [ownerList, setOwnerList] = useState<[]>([]);
 
   const getOwners = async () => {
-    const res = await fetchGet(`owners`);
+    const res = await fetchGet(`owners/clinic/${localStorage.getItem('clinicId')}`);
     console.log(res);
 
     setOwnerList(res);
