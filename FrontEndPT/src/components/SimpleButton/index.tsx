@@ -2,7 +2,7 @@
 interface SimpleButtonProps {
     icon?: string;
     label?: string;
-    onClick: () => void;
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const SimpleButton = ({icon, label, onClick}: SimpleButtonProps) => {

@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.sasl.AuthenticationException;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,6 +42,14 @@ public class UsersService {
         ));
     }
 
+    public Users authenticate(UsersRepresentation.UserLogin userLogin) throws AuthenticationException {
+        Users user = usersRepository.findByLogin(userLogin.getLogin());
+        if (user != null && user.getPassword().equals(userLogin.getPassword())) {
+            return user;
+        } else {
+            throw new AuthenticationException("Invalid login credentials");
+        }
+    }
     public Users update(Long id, UsersRepresentation.UserUpdate entity) {
         var dbEntity = usersRepository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
         modelMapper.map(entity, dbEntity);

@@ -1,6 +1,7 @@
 package com.example.PawsTime.clinic;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class ClinicController {
     }
 
     @PostMapping
-    public ClinicRepresentation.clinicResponse createClinic(@RequestBody ClinicRepresentation.createClinic clinic){
-        return ClinicRepresentation.clinicResponse.from(service.createClinic(clinic));
+    public ResponseEntity<ClinicRepresentation.clinicResponse> createClinic(@RequestBody ClinicRepresentation.createClinic clinic){
+        return ResponseEntity.ok().body(ClinicRepresentation.clinicResponse.from(service.createClinic(clinic)));
     }
 
     @PostMapping("{id}")

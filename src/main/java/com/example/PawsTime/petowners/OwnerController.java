@@ -1,6 +1,9 @@
 package com.example.PawsTime.petowners;
 
+import com.example.PawsTime.clinic.Clinic;
+import com.example.PawsTime.clinic.QClinic;
 import com.example.PawsTime.exceptions.NotFoundException;
+import com.querydsl.jpa.impl.JPAQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ import java.util.List;
 @RequestMapping("owners")
 @AllArgsConstructor
 public class OwnerController {
+
     private OwnerService service;
 
     @GetMapping
@@ -25,6 +29,11 @@ public class OwnerController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/clinic/{clinics}")
+    public ResponseEntity<List<OwnerRepresentation.OwnerResponse>> getOwnersByClinic(@PathVariable Clinic clinics){
+        return ResponseEntity.ok(service.getOwnersByClinic(clinics).stream().map(OwnerRepresentation.OwnerResponse::fromOwner).toList());
     }
 
     @PostMapping

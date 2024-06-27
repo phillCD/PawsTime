@@ -1,7 +1,12 @@
 package com.example.PawsTime.petowners;
 
+import com.example.PawsTime.clinic.Clinic;
+import com.example.PawsTime.clinic.QClinic;
 import com.example.PawsTime.exceptions.NotFoundException;
 import com.example.PawsTime.pet.Pet;
+import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,8 @@ import java.util.List;
 
 @Service
 public class OwnerService {
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
@@ -24,15 +31,25 @@ public class OwnerService {
         return ownerRepository.findById(id).orElse(null);
     }
 
+    public List<Owner> getOwnersByClinic(Clinic clinics) {
+        var query = new JPAQuery<Owner>(entityManager);
+        QOwner owner = QOwner.owner;
+        return query.from(owner)
+                .join(owner.clinics, QClinic.clinic)
+                .where(QClinic.clinic.eq(clinics))
+                .fetch();
+    }
+
     public Owner createOwner(OwnerRepresentation.OwnerCreate create) {
         return ownerRepository.save(new Owner(
                 create.getName(),
-                create.getPet_id(),
+                create.getEmail(),
                 create.getCellphone(),
                 create.getAddress(),
                 create.getDocument(),
                 create.getBirthdate(),
-                create.getGender()
+                create.getGender(),
+                create.getClinics()
         ));
     }
 

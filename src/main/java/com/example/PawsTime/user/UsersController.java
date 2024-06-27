@@ -2,9 +2,11 @@ package com.example.PawsTime.user;
 
 import com.example.PawsTime.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.sasl.AuthenticationException;
 import java.util.List;
 
 @RestController
@@ -38,6 +40,16 @@ public class UsersController {
             return ResponseEntity.ok(UsersRepresentation.UserResponse.from(service.update(id, user)));
         } catch (NotFoundException e) {
             return ResponseEntity.noContent().build();
+        }
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<UsersRepresentation.UserResponse> login(@RequestBody UsersRepresentation.UserLogin userLogin) {
+        try {
+            Users user = service.authenticate(userLogin);
+            return ResponseEntity.ok(UsersRepresentation.UserResponse.from(user));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 

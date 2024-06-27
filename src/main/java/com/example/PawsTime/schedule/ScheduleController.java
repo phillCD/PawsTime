@@ -1,5 +1,6 @@
 package com.example.PawsTime.schedule;
 
+import com.example.PawsTime.petowners.OwnerRepresentation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,15 @@ public class ScheduleController {
         try{
             return ResponseEntity.ok(ScheduleRepresentation.ScheduleResponse.from(service.getScheduleById(id)));
         } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("clinics/{clinicId}")
+    public ResponseEntity<List<ScheduleRepresentation.ScheduleResponse>> getScheduleByClinicId(@PathVariable Long clinicId) {
+        try {
+            return ResponseEntity.ok(ScheduleRepresentation.ScheduleResponse.from(service.getSchedulesByClinicsId(clinicId)));
+        } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
     }

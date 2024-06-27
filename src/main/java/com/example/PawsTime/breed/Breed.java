@@ -1,7 +1,7 @@
 package com.example.PawsTime.breed;
 
-import com.example.PawsTime.category.Category;
 import com.example.PawsTime.core.EntityId;
+import com.example.PawsTime.enums.Animals;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -19,7 +19,10 @@ import lombok.Setter;
 public class  Breed extends EntityId {
     @Column(name = "name")
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(name = "animal")
+    private Animals animal;
+
+    public Breed(Long id) {
+        super(id);
+    }
 }

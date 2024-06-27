@@ -1,5 +1,6 @@
 package com.example.PawsTime.breed;
 
+import com.example.PawsTime.enums.Animals;
 import com.example.PawsTime.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,6 +28,11 @@ public class BreedController {
         } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/animal/{animal}")
+    public ResponseEntity<List<BreedRepresentation.breedResponse>> getBreedsByAnimal(@PathVariable Animals animal){
+        return ResponseEntity.ok(service.getBreedsByAnimal(animal).stream().map(BreedRepresentation.breedResponse::fromBreed).toList());
     }
 
     @PostMapping

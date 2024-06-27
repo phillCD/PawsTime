@@ -85,4 +85,17 @@ public interface UsersRepresentation {
         private String password;
         private String type;
     }
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class UserLogin {
+        @NotNull
+        @NotEmpty
+        private String login;
+        @NotNull
+        @NotEmpty
+        private String password;
+    }
 }

@@ -4,25 +4,26 @@ import ListCard from "../../components/ListCard";
 import { PatientDetail } from "../../components/PatientDetails";
 import SimpleButton from "../../components/SimpleButton";
 import AddIcon from "../../assets/add.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchGet } from "../../service/api";
 
 export default function OwnersPage() {
   const navigate = useNavigate();
+  const { clinicId } = useParams();
 
-  const [ownerList, setOwnerList] = useState<any[]>([]);
+  const [ownerList, setOwnerList] = useState<[]>([]);
 
   const getOwners = async () => {
-    const res = await fetchGet('owners');
+    const res = await fetchGet(`owners/clinic/9`);
     console.log(res);
-    
+
     setOwnerList(res);
-  }
+  };
 
   useEffect(() => {
     getOwners();
-  }, [])
+  }, []);
 
   return (
     <div className="flex flex-1 h-screen p-8 bg-slate-100 gap-5">
@@ -52,18 +53,18 @@ export default function OwnersPage() {
               <div className="flex flex-row flex-1 justify-between">
                 <p>Nome</p>
                 <p>Telefone</p>
-                <p>Email</p>
+                <p>CPF</p>
               </div>
             </div>
-            {ownerList.map((item) => 
+            {ownerList.map((item) => (
               <ListCard
-              key={item.id}
+                key={item.id}
                 id="ID"
                 breed={item.name}
                 petName={item.cellphone}
                 ownerName={item.document}
               />
-            )}
+            ))}
           </div>
         </div>
       </div>

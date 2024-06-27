@@ -17,7 +17,7 @@ const InputComponent = ({ label, type = "text", id, name, onChange, values }: In
         <input
           id={id}
           name={name}
-          className="border border-slate-600 rounded-md placeholder:text-xs p-2"
+          className="form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           type={type}
           onChange={onChange}
           value={values}

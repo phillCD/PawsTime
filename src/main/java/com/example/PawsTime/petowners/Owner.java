@@ -1,4 +1,5 @@
 package com.example.PawsTime.petowners;
+import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.core.EntityId;
 import com.example.PawsTime.enums.Gender;
 import com.example.PawsTime.pet.Pet;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -19,9 +21,8 @@ import java.util.List;
 public class Owner extends EntityId{
     @Column(name = "name")
     private String name;
-    @OneToMany
-    @JoinColumn(name = "pet_id")
-    private List<Pet> pet;
+    @Column(name = "email")
+    private String email;
     @Column(name = "cellphone")
     private String cellphone;
     @Column(name = "address")
@@ -33,5 +34,12 @@ public class Owner extends EntityId{
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
+    @ManyToMany
+    @JoinTable(
+            name = "owner_clinic",
+            joinColumns = @JoinColumn(name = "owner_id"),
+            inverseJoinColumns = @JoinColumn(name = "clinic_id")
+    )
+    private Set<Clinic> clinics;
 
 }

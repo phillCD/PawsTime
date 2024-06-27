@@ -1,6 +1,6 @@
 package com.example.PawsTime.breed;
 
-import com.example.PawsTime.category.Category;
+import com.example.PawsTime.enums.Animals;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +19,7 @@ public interface BreedRepresentation {
         private String name;
         @NotNull
         @NotEmpty
-        private Category category;
+        private Animals animal;
     }
 
     @Builder
@@ -34,7 +34,7 @@ public interface BreedRepresentation {
         private String name;
         @NotNull
         @NotEmpty
-        private Category category;
+        private Animals animal;
     }
 
     @Builder
@@ -46,13 +46,13 @@ public interface BreedRepresentation {
     class breedResponse{
         private Long id;
         private String name;
-        private Category category;
+        private Animals animal;
 
         public static breedResponse fromBreed(Breed breed){
             return breedResponse.builder()
                     .id(breed.getId())
                     .name(breed.getName())
-                    .category(breed.getCategory())
+                    .animal(breed.getAnimal())
                     .build();
         }
     }

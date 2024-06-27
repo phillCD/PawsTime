@@ -3,6 +3,8 @@ package com.example.PawsTime.user;
 import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.core.EntityId;
 import com.example.PawsTime.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 

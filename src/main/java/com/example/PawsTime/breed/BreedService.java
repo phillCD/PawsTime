@@ -1,5 +1,6 @@
 package com.example.PawsTime.breed;
 
+import com.example.PawsTime.enums.Animals;
 import com.example.PawsTime.exceptions.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BreedService {
     public Breed createBreed(BreedRepresentation.createBreed create) {
         return breedRepository.save(new Breed(
                 create.getName(),
-                create.getCategory()
+                create.getAnimal()
         ));
     }
 
@@ -42,5 +43,9 @@ public class BreedService {
         var dbEntity = breedRepository.findById(id).orElseThrow(() -> new NotFoundException("Breed"));
         breedRepository.delete(dbEntity);
         return dbEntity;
+    }
+
+    public List<Breed> getBreedsByAnimal(Animals animal) {
+        return breedRepository.findByAnimal(animal);
     }
 }
