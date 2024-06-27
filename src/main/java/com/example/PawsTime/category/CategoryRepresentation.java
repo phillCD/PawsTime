@@ -10,8 +10,6 @@ public interface CategoryRepresentation {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    @Getter
-    @Setter
     @Data
     class createCategory{
         @NotBlank

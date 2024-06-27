@@ -31,4 +31,6 @@ public class Appointments extends EntityId {
     private String date;
     @Column(name = "hour")
     private String hour;
+    @Column(name = "status")
+    private String status;
 }

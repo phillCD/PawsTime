@@ -8,6 +8,8 @@ import UserIcon from "../../assets/user.svg";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const userId = localStorage.getItem("userId");
+  const clinicId = localStorage.getItem("clinicId");
 
   return (
     <>
@@ -23,21 +25,21 @@ export default function NavBar() {
           >
             <li>
               <NavButton
-                link="/schedule"
+                link={`/schedule/${userId}`}
                 text="Agenda"
                 icon={<img src={ScheduleIcon} alt="Icone de Agenda" />}
               />
             </li>
             <li>
               <NavButton
-                link="/patients"
+                link={`/patients/${clinicId}`}
                 text="Pacientes"
                 icon={<img src={PawIcon} alt="Icone de Pata de Animal" />}
               />
             </li>
             <li>
               <NavButton
-                link="/owners"
+                link={`/owners/${clinicId}`}
                 text="Donos"
                 icon={<img src={UserIcon} alt="Icone de Dono" />}
               />
@@ -45,7 +47,7 @@ export default function NavBar() {
           </ul>
           <div className="button p-2 rounded-md">
             <NavButton
-              link="/profile"
+              link={`/profile/${userId}`}
               text="Perfil"
               icon={<img src={UserIcon} alt="Icone de perfil" />}
             />

@@ -8,9 +8,11 @@ export const fetchGet = async (url: string) => {
 }
 
 export const fetchPost = async (url: string, body: any) => {
+    console.log(`body`, body);
+    
     const res = await fetch(`${urlBase}${url}`, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             "Content-Type": "application/json",
           },

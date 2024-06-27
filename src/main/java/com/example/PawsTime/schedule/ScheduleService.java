@@ -1,6 +1,12 @@
 package com.example.PawsTime.schedule;
 
+import com.example.PawsTime.clinic.QClinic;
 import com.example.PawsTime.exceptions.NotFoundException;
+import com.example.PawsTime.petowners.Owner;
+import com.example.PawsTime.petowners.QOwner;
+import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +16,9 @@ import java.util.List;
 
 @Service
 public class ScheduleService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
@@ -21,6 +30,18 @@ public class ScheduleService {
 
     public Schedule getScheduleById(Long id) {
         return scheduleRepository.findById(id).orElse(null);
+    }
+
+    public List<Schedule> getSchedulesByClinicsId(Long clinicId) {
+        QSchedule qSchedule = QSchedule.schedule;
+        QClinic qClinic = QClinic.clinic;
+
+        JPAQuery<Schedule> query =  new JPAQuery<Schedule>(entityManager);
+
+        return query.from(qSchedule)
+                .join(qSchedule.clinic_id, qClinic)
+                .where(qClinic.id.eq(clinicId))
+                .fetch();
     }
 
     public Schedule createSchedule(ScheduleRepresentation.createSchedule create) {

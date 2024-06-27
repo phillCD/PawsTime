@@ -1,6 +1,7 @@
 package com.example.PawsTime.appointments;
 
 import com.example.PawsTime.pet.Pet;
+import com.example.PawsTime.pet.PetRepresentation;
 import com.example.PawsTime.schedule.Schedule;
 import com.example.PawsTime.user.Users;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public interface AppointmentsRepresentation {
 
@@ -36,6 +39,9 @@ public interface AppointmentsRepresentation {
         @NotNull
         @NotEmpty
         private String hour;
+        @NotNull
+        @NotEmpty
+        private String status;
     }
 
     @Builder
@@ -61,6 +67,8 @@ public interface AppointmentsRepresentation {
         @NotNull
         @NotEmpty
         private String hour;
+        @NotEmpty
+        private String status;
     }
 
     @Builder
@@ -75,6 +83,7 @@ public interface AppointmentsRepresentation {
         private String procedure;
         private String date;
         private String hour;
+        private String status;
 
         public static appointmentsResponse fromAppointments(Appointments appointments){
             return appointmentsResponse.builder()
@@ -85,7 +94,14 @@ public interface AppointmentsRepresentation {
                     .procedure(appointments.getProcedure())
                     .date(appointments.getDate())
                     .hour(appointments.getHour())
+                    .status(appointments.getStatus())
                     .build();
+        }
+
+        public static List<appointmentsResponse> fromAppointments(List<Appointments> appointments){
+            return appointments.stream()
+                    .map(appointmentsResponse::fromAppointments)
+                    .collect(Collectors.toList());
         }
     }
 }

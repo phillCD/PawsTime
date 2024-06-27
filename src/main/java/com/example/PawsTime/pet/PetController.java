@@ -30,6 +30,15 @@ public class PetController {
         }
     }
 
+    @GetMapping("clinics/{id}")
+    public ResponseEntity<List<PetRepresentation.PetResponse>> getPetByClinicsId(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(PetRepresentation.PetResponse.from(service.getPetsByClinicsId(id)));
+        } catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping("{id}")
     public ResponseEntity<PetRepresentation.PetResponse> updatePet(@PathVariable Long id, @RequestBody PetRepresentation.updatePet pet){
         try{

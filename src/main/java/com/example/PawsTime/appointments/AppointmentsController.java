@@ -28,6 +28,15 @@ public class AppointmentsController {
         }
     }
 
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<AppointmentsRepresentation.appointmentsResponse>> getAppointmentsByDate(@PathVariable String date){
+        try{
+            return ResponseEntity.ok(AppointmentsRepresentation.appointmentsResponse.fromAppointments(service.getAppointmentsByDate(date)));
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<AppointmentsRepresentation.appointmentsResponse> createAppointments(@RequestBody AppointmentsRepresentation.createAppointments appointments){
         try{

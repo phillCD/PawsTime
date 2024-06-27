@@ -9,6 +9,7 @@ import OwnerRegister from "./pages/OwnersRegistration";
 import PatientsRegister from "./pages/PatientsRegistration";
 import Profile from "./pages/Profile";
 import Enchiridion from "./pages/Enchiridion";
+import { AuthProvider } from "./context/AuthContext/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -23,15 +24,15 @@ const router = createBrowserRouter([
     element: <NavBar />,
     children: [
       {
-        path: "/schedule",
+        path: "/schedule/:userId",
         element: <SchedulePage />,
       },
       {
-        path: "/patients",
+        path: "/patients/:clinicId",
         element: <PatientsPage />,
       },
       {
-        path: "/owners",
+        path: "/owners/:clinicId",
         element: <OwnersPage />,
       },
       {
@@ -57,7 +58,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   );
 }

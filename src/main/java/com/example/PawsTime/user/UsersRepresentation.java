@@ -4,10 +4,6 @@ import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.enums.Gender;
 import lombok.*;
 
-import javax.validation.constraints.*;
-import java.util.List;
-import java.util.Set;
-
 public interface UsersRepresentation {
 
     @Data

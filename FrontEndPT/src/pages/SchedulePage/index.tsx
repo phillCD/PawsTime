@@ -10,6 +10,7 @@ import AddIcon from "../../assets/add.svg";
 import Modal from "../../components/Modal";
 import InputComponent from "../../components/Input";
 import SelectComponent from "../../components/Select";
+import { fetchGet } from "../../service/api";
 
 export default function SchedulePage() {
   const [value, onChange] = useState<Value>(new Date());
@@ -23,6 +24,22 @@ export default function SchedulePage() {
   const day = dateObj.getUTCDate();
   const month = dateObj.toLocaleString("default", { month: "long" }); // months from 1-12
   const year = dateObj.getUTCFullYear();
+
+  const [appList, setAppList] = useState([]);
+  //const [schedList, setSchedList] = useState([]);
+
+  const getAppointments = () => {
+    const month = dateObj.getMonth() + 1;
+
+    fetchGet(
+      `appointments/date/${year}-${
+        month < 10 ? `0` + month : month
+      }-${dateObj.getDate()}`
+    ).then((res) => {
+      setAppList(res);
+      console.log(res);
+    });
+  };
 
   return (
     <>
@@ -79,6 +96,7 @@ export default function SchedulePage() {
         <div>
           <Calendar
             onChange={onChange}
+            onClickDay={() => getAppointments()}
             value={value}
             locale="pt-BR"
             className="rounded-md bg-green-500 items-center justify-center"
@@ -102,7 +120,32 @@ export default function SchedulePage() {
               <hr className="w-52 border-green-500" />
             </div>
             <div className="flex flex-1 flex-col gap-2">
-              <Appointments
+              {appList
+                .filter((item) => item.status == "")
+                .map((item: any) => (
+                  <Appointments
+                    key={item.id}
+                    hour={item.hour}
+                    name={item.pet_id.name}
+                    procedure={item.procedure}
+                    status={item.status}
+                    onClick={() => setIsAddAppointmentModalVisible(true)}
+                  />
+                ))}
+              {appList
+                .filter((item) => item.status != "")
+                .map((item: any) => (
+                  <Appointments
+                    key={item.id}
+                    hour={item.hour}
+                    name={item.pet_id.name}
+                    procedure={item.procedure}
+                    status={item.status}
+                    onClick={() => setIsAddAppointmentModalVisible(true)}
+                  />
+                ))}
+
+              {/*  <Appointments
                 onClick={() => setIsAddAppointmentModalVisible(true)}
               />
               <Appointments
@@ -143,7 +186,7 @@ export default function SchedulePage() {
               />
               <Appointments
                 onClick={() => setIsAddAppointmentModalVisible(true)}
-              />
+              /> */}
             </div>
           </div>
         </div>

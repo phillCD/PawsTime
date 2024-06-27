@@ -1,6 +1,7 @@
 package com.example.PawsTime.petowners;
 
 import com.example.PawsTime.exceptions.NotFoundException;
+import com.example.PawsTime.pet.PetRepresentation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,15 @@ public class OwnerController {
         try{
             return ResponseEntity.ok(OwnerRepresentation.OwnerResponse.fromOwner(service.getOwnerById(id)));
         } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("clinics/{id}")
+    public ResponseEntity<List<OwnerRepresentation.OwnerResponse>> getOwnersByClinicsId(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(OwnerRepresentation.OwnerResponse.fromOwner(service.getOwnersByClinicsId(id)));
+        } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
     }

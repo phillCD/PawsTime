@@ -1,7 +1,9 @@
 package com.example.PawsTime.petowners;
 
+import com.example.PawsTime.clinic.Clinic;
 import com.example.PawsTime.enums.Gender;
 import com.example.PawsTime.pet.Pet;
+import com.example.PawsTime.pet.PetRepresentation;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public interface OwnerRepresentation {
 
@@ -40,6 +44,9 @@ public interface OwnerRepresentation {
         @NotBlank
         @Enumerated(EnumType.STRING)
         private Gender gender;
+        @NotNull
+        @NotBlank
+        private Set<Clinic> clinics;
     }
 
     @Builder
@@ -94,6 +101,12 @@ public interface OwnerRepresentation {
                     .birthdate(owner.getBirthdate())
                     .gender(owner.getGender())
                     .build();
+        }
+
+        public static List<OwnerRepresentation.OwnerResponse> fromOwner(List<Owner> owners){
+            return owners.stream()
+                    .map(OwnerRepresentation.OwnerResponse::fromOwner)
+                    .collect(Collectors.toList());
         }
     }
 }

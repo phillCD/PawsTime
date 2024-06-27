@@ -4,24 +4,23 @@ import ListCard from "../../components/ListCard";
 import { PatientDetail } from "../../components/PatientDetails";
 import SimpleButton from "../../components/SimpleButton";
 import AddIcon from "../../assets/add.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchGet } from "../../service/api";
-
 export default function PatientsPage() {
   const navigate = useNavigate();
+  const { clinicId } = useParams();
 
-  const [patientList, setPatientList] = useState<any[]>([]);
+  const [patientList, setPatientList] = useState<[]>([]);
 
   const getPatients = async () => {
-    const res = await fetchGet('pet');
+    const res = await fetchGet(`pet/clinics/${clinicId}`);
     setPatientList(res);
-  }
+  };
 
   useEffect(() => {
     getPatients();
-  }, [])
-
+  });
 
   return (
     <div className="flex flex-1 h-screen p-8 bg-slate-100 gap-5">
@@ -54,14 +53,16 @@ export default function PatientsPage() {
                 <p>Nome do dono</p>
               </div>
             </div>
-            {patientList.map((item) => (
-              <ListCard
-              id="ID"
-              petName={item.name} 
-              breed={item.breed}
-              ownerName={item.owner}
-            />
-            ))}
+            {patientList.length > 0 &&
+              patientList.map((item) => (
+                <ListCard
+                  key={item.id}
+                  id="ID"
+                  petName={item.name}
+                  breed={item.breed.name}
+                  ownerName={item.owner.name}
+                />
+              ))}
           </div>
         </div>
       </div>

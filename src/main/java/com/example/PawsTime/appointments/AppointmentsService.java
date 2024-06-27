@@ -24,6 +24,10 @@ public class AppointmentsService {
         return appointmentsRepository.findById(id).orElse(null);
     }
 
+    public List<Appointments> getAppointmentsByDate(String date) {
+        return appointmentsRepository.findByDate(date);
+    }
+
     public Appointments createAppointments(AppointmentsRepresentation.createAppointments create) {
         return appointmentsRepository.save(new Appointments(
                 create.getSchedule_id(),
@@ -31,8 +35,8 @@ public class AppointmentsService {
                 create.getPet_id(),
                 create.getProcedure(),
                 create.getDate(),
-                create.getHour()
-        ));
+                create.getHour(),
+                create.getStatus()));
     }
 
     public Appointments update(Long id, AppointmentsRepresentation.updateAppointments entity) {
