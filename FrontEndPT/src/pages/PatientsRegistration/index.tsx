@@ -13,8 +13,8 @@ const PatientsRegister = () => {
   const [breeds, setBreeds] = useState<Breed[]>([]); 
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
-  const [owner, setOwner] = useState('');
   const [owners, setOwners] = useState<Owner[]>([]);
+  const [selectedOwner, setSelectedOwner] = useState<Owner | undefined>(undefined);
   const [error, setError] = useState('');
 
   interface Owner {
@@ -52,40 +52,28 @@ const PatientsRegister = () => {
 
   const animalKey = getKeyByValue(animal);
 
-  const ownerObject = owners.map((owner) => ({
-      id : owner.id,
-      name: owner.name,
-      email: owner.email,
-      cellphone: owner.cellphone,
-      address: owner.address,
-      document: owner.document,
-      birthdate: owner.birthdate,
-  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(owner);
-      const selectedOwnerObject = ownerObject[Number(owner)];
 
       const response = await fetch('http://localhost:8080/pet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        // Wrap the pet information in an array
         body: JSON.stringify({
           name,
           breed,
           gender,
           age,
-          owner: selectedOwnerObject,
+          owner: owners[0],
         }),
       });
   
+      console.log(owners);
 
       if (response.ok) {
-        console.log(selectedOwnerObject)
         console.log('Pet cadastrado com sucesso!');
       } else {
         setError('Falha ao cadastrar. Tente novamente.');
@@ -111,14 +99,21 @@ const PatientsRegister = () => {
   }, [animal]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/owners')
+    fetch('http://localhost:8080/owners') // Adjust the endpoint as needed
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         setOwners(data);
       })
       .catch(error => console.error('Error fetching owners:', error));
   }, []);
+
+  const handleOwnerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const ownerId = parseInt(event.target.value, 10);
+    const owner = owners.find(o => o.id === ownerId);
+    if (owner) {
+      setSelectedOwner(owner);
+    }
+  };
 
   return (
     <div className="flex h-screen p-8 bg-slate-100 gap-5 items-center justify-center">
@@ -165,18 +160,9 @@ const PatientsRegister = () => {
                 </div>
                 <InputComponent label="Idade" id="age" name="age" onChange={(e) => setAge(e.target.value)} values={age}/>
                 <div>
-                  <label>Dono</label>
-                  <select
-                    className="form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="owner"
-                    name="owner"
-                    value={owner} // Ensure this is correctly initialized in your state
-                    onChange={(e) => {
-                      console.log("Selected owner ID:", e.target.value); // Debugging line
-                      setOwner(e.target.value);
-                    }}
-                  >
-                    <option value="">Selecione</option>
+                  <label htmlFor="owner">Owner</label>
+                  <select className="form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="owner" onChange={handleOwnerChange} value={selectedOwner?.id || ''}>
+                    <option value=""></option>
                     {owners.map((owner) => (
                       <option key={owner.id} value={owner.id}>
                         {owner.name}
