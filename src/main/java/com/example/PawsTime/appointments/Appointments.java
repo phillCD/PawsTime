@@ -21,7 +21,7 @@ public class Appointments extends EntityId {
     private Schedule schedule_id;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user_id;
+    private Users user;
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet_id;

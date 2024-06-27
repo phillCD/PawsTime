@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public interface AppointmentsRepresentation {
 
@@ -81,11 +83,17 @@ public interface AppointmentsRepresentation {
                     .id(appointments.getId())
                     .schedule_id(appointments.getSchedule_id())
                     .pet_id(appointments.getPet_id())
-                    .user_id(appointments.getUser_id())
+                    .user_id(appointments.getUser())
                     .procedure(appointments.getProcedure())
                     .date(appointments.getDate())
                     .hour(appointments.getHour())
                     .build();
+        }
+
+        public static List<appointmentsResponse> fromAppointments(List<Appointments> appointments){
+            return appointments.stream()
+                    .map(appointmentsResponse::fromAppointments)
+                    .collect(Collectors.toList());
         }
     }
 }

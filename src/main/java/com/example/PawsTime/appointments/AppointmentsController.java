@@ -28,6 +28,15 @@ public class AppointmentsController {
         }
     }
 
+    @GetMapping("/date/{date}/user/{userId}")
+    public ResponseEntity<List<AppointmentsRepresentation.appointmentsResponse>> getAppointmentsByDateAndUserId(@PathVariable String date, Long userId){
+        try{
+            return ResponseEntity.ok(AppointmentsRepresentation.appointmentsResponse.fromAppointments(service.getAppointmentsByDateAndUserId(date, userId)));
+        } catch (NotFoundException e){
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<AppointmentsRepresentation.appointmentsResponse> createAppointments(@RequestBody AppointmentsRepresentation.createAppointments appointments){
         try{

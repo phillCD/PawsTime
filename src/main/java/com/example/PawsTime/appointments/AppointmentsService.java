@@ -24,6 +24,10 @@ public class AppointmentsService {
         return appointmentsRepository.findById(id).orElse(null);
     }
 
+    public List<Appointments> getAppointmentsByDateAndUserId(String date, Long userId) {
+        return appointmentsRepository.findByDateAndUserId(date, userId);
+    }
+
     public Appointments createAppointments(AppointmentsRepresentation.createAppointments create) {
         return appointmentsRepository.save(new Appointments(
                 create.getSchedule_id(),
